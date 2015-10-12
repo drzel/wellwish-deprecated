@@ -61,14 +61,26 @@ class WishesController < ApplicationController
     end
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_wish
-      @wish = Wish.find(params[:id])
-    end
+  def upvote
+    @wish = Wish.find(params[:id])
+    @wish.upvote_by current_user
+    redirect_to wishes_path
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def wish_params
-      params.require(:wish).permit(:title, :description)
-    end
+  def downvote
+    @wish = Wish.find(params[:id])
+    @wish.downvote_by current_user
+    redirect_to wishes_path
+  end
+
+  private
+  # Use callbacks to share common setup or constraints between actions.
+  def set_wish
+    @wish = Wish.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def wish_params
+    params.require(:wish).permit(:title, :description)
+  end
 end

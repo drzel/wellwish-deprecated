@@ -1,11 +1,17 @@
 Rails.application.routes.draw do
+  root 'wishes#index'
   devise_for :users
-  resources :wishes
+  resources :wishes do
+    member do
+      put "like", to: "wishes#upvote"
+      put "dislike", to: "wishes#downvote"
+    end
+  end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'wishes#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

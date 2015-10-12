@@ -19,6 +19,9 @@
         <td><%= link_to 'Show', wish %></td>
         <td><%= link_to 'Edit', edit_wish_path(wish) %></td>
         <td><%= link_to 'Destroy', wish, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'upvote', like_wish_path(wish), method: :put %></td>
+        <td><%= link_to 'downvote', dislike_wish_path(wish), method: :put %></td>
+        <td><%= wish.score %></td>
       </tr>
     <% end %>
   </tbody>
