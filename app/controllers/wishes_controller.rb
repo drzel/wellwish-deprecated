@@ -14,7 +14,7 @@ class WishesController < ApplicationController
 
   # GET /wishes/new
   def new
-    @wish = Wish.new
+    @wish = current_user.wishes.new
   end
 
   # GET /wishes/1/edit
@@ -24,7 +24,7 @@ class WishesController < ApplicationController
   # POST /wishes
   # POST /wishes.json
   def create
-    @wish = Wish.new(wish_params)
+    @wish = current_user.wishes.new(wish_params)
 
     respond_to do |format|
       if @wish.save
