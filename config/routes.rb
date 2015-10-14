@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :locations
   root 'wishes#index'
   devise_for :users
   resources :wishes do
