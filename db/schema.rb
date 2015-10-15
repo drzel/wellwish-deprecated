@@ -20,9 +20,12 @@ ActiveRecord::Schema.define(version: 20151014111323) do
     t.string   "address"
     t.float    "latitude"
     t.float    "longitude"
+    t.integer  "wish_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  add_index "locations", ["wish_id"], name: "index_locations_on_wish_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

@@ -10,5 +10,19 @@
   <%= @wish.description %>
 </p>
 
+<p>
+  <strong>Address:</strong>
+  <%= @wish.location.address %>
+</p>
+
+<p>
+  <strong>Latitude:</strong>
+  <%= @wish.location.latitude %>
+</p>
+
+<p>
+  <strong>Longitude:</strong>
+  <%= @wish.location.longitude %>
+</p>
 <%= link_to 'Edit', edit_wish_path(@wish) %> |
 <%= link_to 'Back', wishes_path %>
