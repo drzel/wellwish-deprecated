@@ -3,7 +3,7 @@
 <table class="table">
   <thead>
     <tr>
-      <th>Score</th>
+      <th colspan="3" class="text-center">Score</th>
       <th>Title</th>
       <th>Description</th>
       <th>Location</th>
@@ -14,15 +14,23 @@
   <tbody>
     <% @wishes.each do |wish| %>
       <tr>
+        <td>
+          <%= link_to(like_wish_path(wish)) do %>
+            <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+          <% end %>
+        </td>
         <td><%= wish.score %></td>
+        <td>
+          <%= link_to(dislike_wish_path(wish)) do %>
+            <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
+          <% end %>
+        </td>
         <td><%= wish.title %></td>
         <td><%= wish.description %></td>
         <td><%= wish.location.address %></td>
         <td><%= link_to 'Show', wish %></td>
         <td><%= link_to 'Edit', edit_wish_path(wish) %></td>
         <td><%= link_to 'Destroy', wish, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <td><%= link_to 'upvote', like_wish_path(wish), method: :put %></td>
-        <td><%= link_to 'downvote', dislike_wish_path(wish), method: :put %></td>
       </tr>
     <% end %>
   </tbody>
