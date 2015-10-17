@@ -15,13 +15,13 @@
     <% @wishes.each do |wish| %>
       <tr>
         <td>
-          <%= link_to(like_wish_path(wish)) do %>
+          <%= link_to(like_wish_path(wish), { method: :put }) do %>
             <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
           <% end %>
         </td>
         <td><%= wish.score %></td>
         <td>
-          <%= link_to(dislike_wish_path(wish)) do %>
+          <%= link_to(dislike_wish_path(wish), { method: :put }) do %>
             <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
           <% end %>
         </td>
