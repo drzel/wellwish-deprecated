@@ -4,7 +4,7 @@ class WishesController < ApplicationController
   # GET /wishes
   # GET /wishes.json
   def index
-    @wishes = Wish.all
+    @wishes = Wish.all.sort_by(&:score).reverse
   end
 
   # GET /wishes/1
