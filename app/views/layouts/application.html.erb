@@ -9,13 +9,19 @@
   <body>
     <%= render "layouts/header" %>
 
-    <% if notice.present? %>
-      <p class="notice"><%= notice %></p>
-    <% end %>
-
-    <% if notice.present? %>
-      <p class="alert"><%= alert %></p>
-    <% end %>
+    <div class="container">
+      <div class="row">
+        <% flash.each do |type, content| %>
+          <% if content.respond_to?('each') %>
+            <% content.each do |item| %>
+              <%= render 'layouts/alert', type: type, content: item %>
+            <% end %>
+          <% else %>
+            <%= render 'layouts/alert', type: type, content: content %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
 
     <div class="container">
       <div class="row">
