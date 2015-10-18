@@ -1,5 +1,6 @@
 class WishesController < ApplicationController
-  before_action :set_wish, only: [:show, :edit, :update, :destroy, :upvote, :downvote]
+  before_action :set_wish, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:show, :edit, :update, :destroy, :upvote, :downvote]
 
   # GET /wishes
   # GET /wishes.json
