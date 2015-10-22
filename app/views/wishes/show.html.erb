@@ -1,28 +1,36 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Title:</strong>
-  <%= @wish.title %>
+<strong>Title:</strong>
+<%= @wish.title %>
 </p>
 
 <p>
-  <strong>Description:</strong>
-  <%= @wish.description %>
+<strong>Description:</strong>
+<%= @wish.description %>
 </p>
 
 <p>
-  <strong>Address:</strong>
-  <%= @wish.location.address %>
+<strong>Address:</strong>
+<%= @wish.location.address %>
 </p>
 
 <p>
-  <strong>Latitude:</strong>
-  <%= @wish.location.latitude %>
+<strong>Latitude:</strong>
+<%= @wish.location.latitude %>
 </p>
 
 <p>
-  <strong>Longitude:</strong>
-  <%= @wish.location.longitude %>
+<strong>Longitude:</strong>
+<%= @wish.location.longitude %>
 </p>
+
+<p>
+<strong>Pictures:</strong>
+</p>
+<% @wish.images.each do |image| %>
+  <p><%= link_to image_tag(image.photo.url(:medium)), image.photo.url %></p>
+<% end %>
+
 <%= link_to 'Edit', edit_wish_path(@wish) %> |
 <%= link_to 'Back', wishes_path %>
