@@ -30,6 +30,13 @@ class WishesController < ApplicationController
 
     respond_to do |format|
       if @wish.save
+
+        if params[:photos]
+          params[:photos].each do |photo|
+            @wish.images.create(photo: photo)
+          end
+        end
+
         format.html { redirect_to @wish, notice: 'Wish was successfully created.' }
         format.json { render :show, status: :created, location: @wish }
       else

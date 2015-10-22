@@ -1,7 +1,8 @@
 class Wish < ActiveRecord::Base
   belongs_to :user
   acts_as_votable
-  has_one :location, :dependent => :destroy
+  has_one :location, dependent: :destroy
+  has_many :images, dependent: :destroy
   accepts_nested_attributes_for :location
 
   def score
