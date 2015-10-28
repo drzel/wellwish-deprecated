@@ -20,10 +20,17 @@
     <%= f.text_area :description %>
   </div>
 
+  <%= f.fields_for :skills do |skills_fields| %>
+    <div class="field">
+      <%= skills_fields.label "Skill" %><br>
+      <%= skills_fields.text_field :name %>
+    </div>
+  <% end %>
+
   <%= f.fields_for :location do |location_fields| %>
     <div class="field">
       <%= location_fields.label :address %><br>
-      <%= location_fields.text_area :address %><br>
+      <%= location_fields.text_area :address %>
     </div>
   <% end %>
 
