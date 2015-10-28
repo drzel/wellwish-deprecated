@@ -26,6 +26,13 @@
 </p>
 
 <p>
+<strong>Skills:</strong>
+<% @wish.skills.each do |skill| %>
+  <%= skill.name %>
+<% end %>
+</p>
+
+<p>
 <strong>Pictures:</strong>
 </p>
 <% @wish.images.each do |image| %>
