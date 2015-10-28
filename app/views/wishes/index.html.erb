@@ -8,6 +8,7 @@
       <th>Title</th>
       <th>Description</th>
       <th>Location</th>
+      <th>Skills</th>
       <th colspan="5"></th>
     </tr>
   </thead>
@@ -34,6 +35,11 @@
         <td><%= wish.title %></td>
         <td><%= wish.description %></td>
         <td><%= wish.location.address %></td>
+        <td>
+          <% wish.skills.each do |skill| %>
+            <%= skill.name %> 
+          <% end %>
+        </td>
         <td><%= link_to 'Show', wish %></td>
         <td><%= link_to 'Edit', edit_wish_path(wish) %></td>
         <td><%= link_to 'Destroy', wish, method: :delete, data: { confirm: 'Are you sure?' } %></td>
