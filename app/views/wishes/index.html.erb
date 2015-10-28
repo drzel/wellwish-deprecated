@@ -26,7 +26,11 @@
             <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
           <% end %>
         </td>
-        <td><%= image_tag wish.images.first.photo.url(:thumb) %></td>
+        <td>
+          <% if wish.images.exists? %>
+            <%= image_tag wish.images.first.photo.url(:thumb) %>
+          <% end %>
+        </td>
         <td><%= wish.title %></td>
         <td><%= wish.description %></td>
         <td><%= wish.location.address %></td>
