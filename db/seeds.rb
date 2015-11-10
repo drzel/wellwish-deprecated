@@ -7,7 +7,13 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 wishes = 20.times do
-  @wish = Wish.new
+  @user = User.new
+  @user.email = Faker::Internet.email
+  @user.password = "password"
+  @user.password_confirmation = "password"
+  @user.save
+
+  @wish = @user.wishes.new
   @wish.title = Faker::Lorem.sentence
   @wish.description = Faker::Lorem.paragraph(rand(1..10))
 
@@ -25,4 +31,5 @@ wishes = 20.times do
   @wish.save
 
   @wish.images.create(photo: File.new("public/images/seed.png"))
+
 end
