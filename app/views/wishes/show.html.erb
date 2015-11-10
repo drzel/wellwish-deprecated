@@ -33,6 +33,13 @@
 </p>
 
 <p>
+<strong>Tools:</strong>
+<% @wish.tools.each do |tool| %>
+  <%= tool.name %>
+<% end %>
+</p>
+
+<p>
 <strong>Pictures:</strong>
 </p>
 <% @wish.images.each do |image| %>

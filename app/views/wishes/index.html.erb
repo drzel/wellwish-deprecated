@@ -9,6 +9,7 @@
       <th>Description</th>
       <th>Location</th>
       <th>Skills</th>
+      <th>Tools</th>
       <th colspan="5"></th>
     </tr>
   </thead>
@@ -38,6 +39,11 @@
         <td>
           <% wish.skills.each do |skill| %>
             <%= skill.name %> 
+          <% end %>
+        </td>
+        <td>
+          <% wish.tools.each do |tool| %>
+            <%= tool.name %> 
           <% end %>
         </td>
         <td><%= link_to 'Show', wish %></td>

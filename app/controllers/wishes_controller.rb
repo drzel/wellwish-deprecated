@@ -18,6 +18,7 @@ class WishesController < ApplicationController
     @wish = Wish.new
     @wish.build_location
     @wish.skills.new
+    @wish.tools.new
   end
 
   # GET /wishes/1/edit
@@ -91,6 +92,6 @@ class WishesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def wish_params
-    params.require(:wish).permit(:title, :description, location_attributes: [:address], skills_attributes: [:name])
+    params.require(:wish).permit(:title, :description, location_attributes: [:address], skills_attributes: [:name], tools_attributes: [:name])
   end
 end

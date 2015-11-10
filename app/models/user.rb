@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   has_many :wishes
-  has_many :skills
+  has_and_belongs_to_many :skills
+  has_and_belongs_to_many :tools
   acts_as_voter
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151028065245) do
+ActiveRecord::Schema.define(version: 20151110012517) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,14 +41,47 @@ ActiveRecord::Schema.define(version: 20151028065245) do
 
   create_table "skills", force: :cascade do |t|
     t.string   "name"
-    t.integer  "wish_id"
-    t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  add_index "skills", ["user_id"], name: "index_skills_on_user_id", using: :btree
-  add_index "skills", ["wish_id"], name: "index_skills_on_wish_id", using: :btree
+  create_table "skills_users", id: false, force: :cascade do |t|
+    t.integer "skill_id"
+    t.integer "user_id"
+  end
+
+  add_index "skills_users", ["skill_id"], name: "index_skills_users_on_skill_id", using: :btree
+  add_index "skills_users", ["user_id"], name: "index_skills_users_on_user_id", using: :btree
+
+  create_table "skills_wishes", id: false, force: :cascade do |t|
+    t.integer "skill_id"
+    t.integer "wish_id"
+  end
+
+  add_index "skills_wishes", ["skill_id"], name: "index_skills_wishes_on_skill_id", using: :btree
+  add_index "skills_wishes", ["wish_id"], name: "index_skills_wishes_on_wish_id", using: :btree
+
+  create_table "tools", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "tools_users", id: false, force: :cascade do |t|
+    t.integer "tool_id"
+    t.integer "user_id"
+  end
+
+  add_index "tools_users", ["tool_id"], name: "index_tools_users_on_tool_id", using: :btree
+  add_index "tools_users", ["user_id"], name: "index_tools_users_on_user_id", using: :btree
+
+  create_table "tools_wishes", id: false, force: :cascade do |t|
+    t.integer "tool_id"
+    t.integer "wish_id"
+  end
+
+  add_index "tools_wishes", ["tool_id"], name: "index_tools_wishes_on_tool_id", using: :btree
+  add_index "tools_wishes", ["wish_id"], name: "index_tools_wishes_on_wish_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -94,6 +127,4 @@ ActiveRecord::Schema.define(version: 20151028065245) do
   add_index "wishes", ["user_id"], name: "index_wishes_on_user_id", using: :btree
 
   add_foreign_key "images", "wishes"
-  add_foreign_key "skills", "users"
-  add_foreign_key "skills", "wishes"
 end

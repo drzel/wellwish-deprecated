@@ -20,6 +20,13 @@
     <%= f.text_area :description %>
   </div>
 
+  <%= f.fields_for :location do |location_fields| %>
+    <div class="field">
+      <%= location_fields.label :address %><br>
+      <%= location_fields.text_area :address %>
+    </div>
+  <% end %>
+
   <%= f.fields_for :skills do |skills_fields| %>
     <div class="field">
       <%= skills_fields.label "Skill" %><br>
@@ -27,10 +34,10 @@
     </div>
   <% end %>
 
-  <%= f.fields_for :location do |location_fields| %>
+  <%= f.fields_for :tools do |tools_fields| %>
     <div class="field">
-      <%= location_fields.label :address %><br>
-      <%= location_fields.text_area :address %>
+      <%= tools_fields.label "Tool" %><br>
+      <%= tools_fields.text_field :name %>
     </div>
   <% end %>
 
