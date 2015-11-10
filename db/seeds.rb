@@ -5,3 +5,18 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+wishes = 20.times do
+  @wish = Wish.new
+  @wish.title = Faker::Lorem.sentence
+  @wish.description = Faker::Lorem.paragraph(rand(1..10))
+  @location = @wish.build_location
+  @location.address = "#{Faker::Address.street_address}, #{Faker::Address.city}, #{Faker::Address.country}"
+  @location.latitude = Faker::Address.latitude
+  @location.longitude = Faker::Address.longitude
+  @skill = @wish.skills.new
+  @skill.name = Faker::Name.title
+  @tool = @wish.tools.new
+  @tool.name = Faker::Hacker.noun
+  @wish.save
+end
