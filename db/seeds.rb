@@ -10,13 +10,19 @@ wishes = 20.times do
   @wish = Wish.new
   @wish.title = Faker::Lorem.sentence
   @wish.description = Faker::Lorem.paragraph(rand(1..10))
+
   @location = @wish.build_location
   @location.address = "#{Faker::Address.street_address}, #{Faker::Address.city}, #{Faker::Address.country}"
   @location.latitude = Faker::Address.latitude
   @location.longitude = Faker::Address.longitude
+
   @skill = @wish.skills.new
   @skill.name = Faker::Name.title
+
   @tool = @wish.tools.new
   @tool.name = Faker::Hacker.noun
+
   @wish.save
+
+  @wish.images.create(photo: File.new("public/images/seed.png"))
 end
