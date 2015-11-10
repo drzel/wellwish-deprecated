@@ -35,7 +35,9 @@
         </td>
         <td><%= wish.title %></td>
         <td><%= wish.description %></td>
-        <td><%= wish.location.address %></td>
+        <% if !wish.location.blank? %>
+          <td><%= wish.location.address %></td>
+        <% end %>
         <td>
           <% wish.skills.each do |skill| %>
             <%= skill.name %> 
