@@ -19,6 +19,7 @@ class WishesController < ApplicationController
     @wish.build_location
     @wish.skills.new
     @wish.tools.new
+    @location = request.location
   end
 
   # GET /wishes/1/edit

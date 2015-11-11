@@ -1,59 +1,44 @@
-<h1>Listing Wishes</h1>
+<h1>Wishing Well</h1>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th colspan="3" class="text-center">Score</th>
-      <th>Picture</th>
-      <th>Title</th>
-      <th>Description</th>
-      <th>Location</th>
-      <th>Skills</th>
-      <th>Tools</th>
-      <th>Wellwisher</th>
-      <th colspan="5"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @wishes.each do |wish| %>
-      <tr>
-        <td>
-          <%= link_to(like_wish_path(wish), { method: :put }) do %>
-            <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
-          <% end %>
-        </td>
-        <td><%= wish.score %></td>
-        <td>
-          <%= link_to(dislike_wish_path(wish), { method: :put }) do %>
-            <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
-          <% end %>
-        </td>
-        <td>
-          <% if wish.images.exists? %>
-            <%= image_tag wish.images.first.photo.url(:thumb) %>
-          <% end %>
-        </td>
-        <td><%= wish.title %></td>
-        <td><%= wish.description %></td>
-        <% if !wish.location.blank? %>
-          <td><%= wish.location.address %></td>
+<% @wishes.each do |wish| %>
+  <div class="media">
+    <div class="media-left">
+      <% if wish.images.exists? %>
+        <%= image_tag wish.images.first.photo.url(:thumb), class: "media-object" %>
+      <% end %>
+      <div class="text-center">
+        <%= link_to(like_wish_path(wish), { method: :put }) do %>
+          <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
         <% end %>
-        <td>
-          <% wish.skills.each do |skill| %>
-            <%= skill.name %>
-          <% end %>
-        </td>
-        <td>
-          <% wish.tools.each do |tool| %>
-            <%= tool.name %>
-          <% end %>
-        </td>
-        <td><%= wish.user.username %></td>
-        <td><%= link_to 'Show', wish %></td>
-        <td><%= link_to 'Edit', edit_wish_path(wish) %></td>
-        <td><%= link_to 'Destroy', wish, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+        <%= wish.score %>
+        <%= link_to(dislike_wish_path(wish), { method: :put }) do %>
+          <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="media-body">
+      <h4 class="media-heading"><%= link_to wish.title, wish %></h4>
+      <p class="small">submitted <%= time_ago_in_words(wish.created_at) %> ago by <%= wish.user.username %></p>
+
+      <p><%= wish.description %></p>
+
+      <% if !wish.location.blank? %>
+        <p><%= wish.location.distance_to(@location) %></p>
+      <% end %>
+
+      <% wish.skills.each do |skill| %>
+        <p><%= skill.name %></p>
+      <% end %>
+
+      <% wish.tools.each do |tool| %>
+        <p><%= tool.name %></p>
+      <% end %>
+
+      <ul>
+        <li><%= link_to 'Edit', edit_wish_path(wish) %></li>
+        <li><%= link_to 'Destroy', wish, method: :delete, data: { confirm: 'Are you sure?' } %></li>
+      </ul>
+    </div>
+  </div>
+<% end %>
