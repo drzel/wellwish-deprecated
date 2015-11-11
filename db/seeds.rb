@@ -8,6 +8,7 @@
 
 wishes = 20.times do
   @user = User.new
+  @user.username = Faker::Internet.user_name
   @user.email = Faker::Internet.email
   @user.password = "password"
   @user.password_confirmation = "password"
@@ -31,5 +32,4 @@ wishes = 20.times do
   @wish.save
 
   @wish.images.create(photo: File.new("public/images/seed.png"))
-
 end

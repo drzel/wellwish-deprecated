@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :locations
   root 'wishes#index'
-  devise_for :users
+  devise_for :users, :controllers => { registrations: 'registrations' }
   resources :wishes do
     member do
       put "like", to: "wishes#upvote"
