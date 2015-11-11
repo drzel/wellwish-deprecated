@@ -24,8 +24,13 @@
       <p><%= wish.description %></p>
 
       <% if !wish.location.blank? %>
-        <p><%= wish.location.distance_to(@location) %></p>
+        <p>
+          <%= wish.location.distance_to([
+          @location.latitude,
+          @location.longitude]) %>
+        </p>
       <% end %>
+      <% binding.pry %>
 
       <% wish.skills.each do |skill| %>
         <p><%= skill.name %></p>
