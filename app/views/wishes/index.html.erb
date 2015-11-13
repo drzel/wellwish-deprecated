@@ -19,6 +19,12 @@
 
     <div class="media-body">
       <h4 class="media-heading"><%= link_to wish.title, wish %></h4>
+      <% if current_user == wish.user %>
+        <small>
+          <%= link_to 'Edit', edit_wish_path(wish) %>
+          <%= link_to 'Delete', wish, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </small>
+      <% end %>
       <p class="small">submitted <%= time_ago_in_words(wish.created_at) %> ago by <%= wish.user.username %></p>
 
       <p><%= wish.description %></p>
@@ -38,11 +44,6 @@
       <% wish.tools.each do |tool| %>
         <p><%= tool.name %></p>
       <% end %>
-
-      <ul>
-        <li><%= link_to 'Edit', edit_wish_path(wish) %></li>
-        <li><%= link_to 'Destroy', wish, method: :delete, data: { confirm: 'Are you sure?' } %></li>
-      </ul>
     </div>
   </div>
 <% end %>
