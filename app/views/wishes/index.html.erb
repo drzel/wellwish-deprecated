@@ -25,9 +25,9 @@
 
       <% if !wish.location.blank? %>
         <p>
-          <%= wish.location.distance_to([
+          <%= number_to_human(wish.location.distance_to([
           @location.latitude,
-          @location.longitude], :km ) %> kms away
+          @location.longitude], :km )) %> kms away
         </p>
       <% end %>
 
