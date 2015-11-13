@@ -27,10 +27,9 @@
         <p>
           <%= wish.location.distance_to([
           @location.latitude,
-          @location.longitude]) %>
+          @location.longitude], :km ) %> kms away
         </p>
       <% end %>
-      <% binding.pry %>
 
       <% wish.skills.each do |skill| %>
         <p><%= skill.name %></p>

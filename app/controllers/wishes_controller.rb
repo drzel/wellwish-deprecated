@@ -6,6 +6,7 @@ class WishesController < ApplicationController
   # GET /wishes.json
   def index
     @wishes = Wish.all.sort_by(&:score).reverse
+    @location = request.location
   end
 
   # GET /wishes/1
@@ -19,7 +20,6 @@ class WishesController < ApplicationController
     @wish.build_location
     @wish.skills.new
     @wish.tools.new
-    @location = request.location
   end
 
   # GET /wishes/1/edit
