@@ -29,11 +29,12 @@
 
       <p><%= wish.description %></p>
 
-      <% if !wish.location.blank? %>
+      <% if wish.location.latitude.present? and wish.location.longitude.present? %>
         <p>
-          <%= number_to_human(wish.location.distance_to([
-          @location.latitude,
-          @location.longitude]), precision: 2) %> kms away
+          <%= number_to_human(1000 * wish.location.distance_to([@location.latitude,@location.longitude]),
+              units: :distance,
+              precision: 2,
+              delimiter: ",") %>
         </p>
       <% end %>
 
