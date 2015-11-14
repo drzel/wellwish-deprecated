@@ -1,7 +1,7 @@
 class Location < ActiveRecord::Base
   belongs_to :wish
   geocoded_by :address
-  after_validation :geocode, if: ->(location){ location.address.present? and
-                                               location.address_changed? and
-                                               location.latitude.nil? }
+  after_validation :geocode, if: ->(obj){ obj.address.present? and
+                                               obj.address_changed? and
+                                               obj.latitude.nil? }
 end
