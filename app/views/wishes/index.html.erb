@@ -33,7 +33,7 @@
         <p>
           <%= number_to_human(wish.location.distance_to([
           @location.latitude,
-          @location.longitude])) %> kms away
+          @location.longitude]), precision: 2) %> kms away
         </p>
       <% end %>
 
