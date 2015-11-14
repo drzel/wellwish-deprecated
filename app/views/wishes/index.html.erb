@@ -18,33 +18,43 @@
     </div>
 
     <div class="media-body">
-      <h4 class="media-heading"><%= link_to wish.title, wish %></h4>
-      <% if current_user == wish.user %>
+      <h4 class="media-heading">
+        <%= link_to wish.title, wish %>
         <small>
-          <%= link_to 'Edit', edit_wish_path(wish) %>
-          <%= link_to 'Delete', wish, method: :delete, data: { confirm: 'Are you sure?' } %>
+          <% if wish.tools.first.name.present? %>
+            <span class="glyphicon glyphicon-wrench"></span>
+            <% wish.tools.each do |tool| %>
+              <span class="label label-default"><%= tool.name %></span>
+            <% end %>
+          <% end %>
+          <% if wish.skills.first.name.present? %>
+            <span class="glyphicon glyphicon-education"></span>
+            <% wish.skills.each do |skill| %>
+              <span class="label label-default"><%= skill.name %></span>
+            <% end %>
+          <% end %>
         </small>
-      <% end %>
-      <p class="small">submitted <%= time_ago_in_words(wish.created_at) %> ago by <%= wish.user.username %></p>
-
-      <p><%= wish.description %></p>
-
+        <% if current_user == wish.user %>
+          <small>
+            <%= link_to edit_wish_path(wish) do %>
+              <span class="glyphicon glyphicon-edit"></span>
+            <% end %>
+            <%= link_to wish, method: :delete, data: { confirm: 'Are you sure?' } do %>
+              <span class="glyphicon glyphicon-trash"></span>
+            <% end %>
+          </small>
+        <% end %>
+      </h4>
+      <div class="small">submitted <%= time_ago_in_words(wish.created_at) %> ago by <%= link_to wish.user.username, "#" %>
       <% if wish.location.latitude.present? and wish.location.longitude.present? %>
-        <p>
-          <%= number_to_human(1000 * wish.location.distance_to([@location.latitude,@location.longitude]),
-              units: :distance,
-              precision: 2,
-              delimiter: ",") %>
-        </p>
-      <% end %>
-
-      <% wish.skills.each do |skill| %>
-        <p><%= skill.name %></p>
-      <% end %>
-
-      <% wish.tools.each do |tool| %>
-        <p><%= tool.name %></p>
-      <% end %>
+        and around
+        <%= number_to_human(1000 * wish.location.distance_to([@location.latitude,@location.longitude]),
+                            units: :distance,
+                            precision: 2,
+                            delimiter: ",") %> away
+                          <% end %>
+      </div>
+      <p><%= wish.description %></p>
     </div>
   </div>
 <% end %>
