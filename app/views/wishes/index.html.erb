@@ -1,5 +1,5 @@
 <h1>Wishing Well</h1>
-
+<%= paginate @wishes %>
 <% @wishes.each do |wish| %>
   <div class="media">
     <div class="media-left">
@@ -58,3 +58,4 @@
     </div>
   </div>
 <% end %>
+<%= paginate @wishes %>

@@ -5,7 +5,7 @@ class WishesController < ApplicationController
   # GET /wishes
   # GET /wishes.json
   def index
-    @wishes = Wish.all.sort_by(&:score).reverse
+    @wishes = Wish.order(cached_votes_score: :desc).page params[:page]
     @location = request.location
   end
 
