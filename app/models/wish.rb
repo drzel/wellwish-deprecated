@@ -8,6 +8,7 @@ class Wish < ActiveRecord::Base
   accepts_nested_attributes_for :location
   accepts_nested_attributes_for :skills
   accepts_nested_attributes_for :tools
+  validates :title, :description, presence: true
 
   def score
     self.get_upvotes.size - self.get_downvotes.size
